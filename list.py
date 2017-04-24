@@ -6,22 +6,33 @@ nums = string.digits
 
 
 
-def initialCheck(pass):
-    return if not [x for x in pass if x in upper] \
-        and if not [y for y in pass if y in lower] \
-        and if not [z for z in pass if z in nums]
+def initialCheck( pswd ):
+    return  [x for x in pswd if x in upper] \
+        and [y for y in pswd if y in lower] \
+        and [z for z in pswd if z in nums]
 
-def strengthCheck(pass):
-    if not initialCheck(pass):
+def strengthCheck(pswd):
+    if not initialCheck(pswd):
         return 0
 
     a = 0.5
     b = 0.2
-    c = 1 - a - b
+    c = 0.3
 
-    special = [x for x in pass if x not in upper or\
-     x not in lower\
+    retNum = [0.6 for x in pswd if x in upper]
+    retNum += [0.4 for y in pswd if y in lower]
+    retNum += [1 for z in pswd if z in nums]
+    
+    special = [x for x in pswd if x not in upper or\
+     x not in lower or \
      x not in nums]
 
-    return int(a * len(pass)\
-        + b )
+    ctr = 0
+    for x in retNum:
+        ctr += x
+    
+    return ctr
+
+
+
+print strengthCheck("abcABC123#")
